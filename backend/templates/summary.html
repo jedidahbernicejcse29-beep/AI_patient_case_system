@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - Clinical Summary</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .item {
+            margin: 10px 0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>MediKiosk</h1>
+
+    <p style="text-align:center;">
+        Clinical History Summary
+    </p>
+
+    <h2>Patient Information</h2>
+
+    <div class="item">
+        <span class="label">Name:</span> {{ patient.name }}
+    </div>
+
+    <div class="item">
+        <span class="label">Age:</span> {{ patient.age }}
+    </div>
+
+    <div class="item">
+        <span class="label">Gender:</span> {{ patient.gender }}
+    </div>
+
+
+    <h2>Chief Complaint</h2>
+
+    <p>{{ patient.chief_complaint }}</p>
+
+
+    <h2>Duration</h2>
+
+    <p>{{ patient.duration }}</p>
+
+
+    <h2>Symptoms</h2>
+
+    <p>{{ patient.symptoms }}</p>
+
+
+    <h2>Medical History</h2>
+
+    <p>{{ patient.medical_history }}</p>
+
+
+    <h2>Surgical History</h2>
+
+    <p>{{ patient.surgical_history }}</p>
+
+
+    <h2>Medications</h2>
+
+    <p>{{ patient.medications }}</p>
+
+
+    <h2>Allergies</h2>
+
+    <p>{{ patient.allergies }}</p>
+
+
+    <h2>Family History</h2>
+
+    <p>{{ patient.family_history }}</p>
+
+
+    <h2>Personal History</h2>
+
+    <p>{{ patient.personal_history }}</p>
+
+
+    <a href="/" class="back">Back to Patient Form</a>
+
+</div>
+
+</body>
+</html>
