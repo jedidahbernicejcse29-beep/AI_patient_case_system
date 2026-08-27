@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - Guided Questions</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .question {
+            margin-top: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 25px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>MediKiosk</h1>
+
+    <p style="text-align:center;">
+        Guided Clinical History
+    </p>
+
+    <form action="/questions" method="POST">
+
+        <!-- Keep original patient information -->
+        <input type="hidden" name="name" value="{{ patient.name }}">
+        <input type="hidden" name="age" value="{{ patient.age }}">
+        <input type="hidden" name="gender" value="{{ patient.gender }}">
+        <input type="hidden" name="chief_complaint" value="{{ patient.chief_complaint }}">
+        <input type="hidden" name="duration" value="{{ patient.duration }}">
+        <input type="hidden" name="symptoms" value="{{ patient.symptoms }}">
+        <input type="hidden" name="medical_history" value="{{ patient.medical_history }}">
+        <input type="hidden" name="surgical_history" value="{{ patient.surgical_history }}">
+        <input type="hidden" name="medications" value="{{ patient.medications }}">
+        <input type="hidden" name="allergies" value="{{ patient.allergies }}">
+        <input type="hidden" name="family_history" value="{{ patient.family_history }}">
+        <input type="hidden" name="personal_history" value="{{ patient.personal_history }}">
+
+        <div class="question">
+            <label>When did your symptoms begin?</label>
+            <input type="text" name="onset" required>
+        </div>
+
+        <div class="question">
+            <label>How severe are your symptoms?</label>
+            <input type="text" name="severity" required>
+        </div>
+
+        <div class="question">
+            <label>Do you have any other symptoms?</label>
+            <textarea name="associated_symptoms"></textarea>
+        </div>
+
+        <div class="question">
+            <label>What makes your symptoms better or worse?</label>
+            <textarea name="factors"></textarea>
+        </div>
+
+        <button type="submit">
+            Continue to Summary
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
