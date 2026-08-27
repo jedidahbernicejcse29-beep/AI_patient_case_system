@@ -26,6 +26,23 @@
             text-align: center;
         }
 
+        .subtitle {
+            text-align: center;
+        }
+
+        .alert {
+            margin-top: 25px;
+            padding: 18px;
+            border: 2px solid #b00020;
+            border-radius: 8px;
+        }
+
+        .alert h2 {
+            color: #b00020;
+            border: none;
+            margin-top: 0;
+        }
+
         h2 {
             margin-top: 30px;
             border-bottom: 1px solid #ddd;
@@ -56,22 +73,45 @@
 
     <h1>MediKiosk</h1>
 
-    <p style="text-align:center;">
+    <p class="subtitle">
         Clinical History Summary
     </p>
+
+
+    <!-- Red Flag Alert -->
+
+    {% if patient.red_flag %}
+    <div class="alert">
+
+        <h2>PRIORITY ALERT</h2>
+
+        <p>
+            Potential urgent symptoms detected.
+        </p>
+
+        <p>
+            Please notify the clinical or triage staff for appropriate assessment.
+        </p>
+
+    </div>
+    {% endif %}
+
 
     <h2>Patient Information</h2>
 
     <div class="item">
-        <span class="label">Name:</span> {{ patient.name }}
+        <span class="label">Name:</span>
+        {{ patient.name }}
     </div>
 
     <div class="item">
-        <span class="label">Age:</span> {{ patient.age }}
+        <span class="label">Age:</span>
+        {{ patient.age }}
     </div>
 
     <div class="item">
-        <span class="label">Gender:</span> {{ patient.gender }}
+        <span class="label">Gender:</span>
+        {{ patient.gender }}
     </div>
 
 
@@ -88,6 +128,29 @@
     <h2>Symptoms</h2>
 
     <p>{{ patient.symptoms }}</p>
+
+
+    <h2>Guided Clinical History</h2>
+
+    <div class="item">
+        <span class="label">Symptom Onset:</span>
+        {{ patient.onset }}
+    </div>
+
+    <div class="item">
+        <span class="label">Severity:</span>
+        {{ patient.severity }}
+    </div>
+
+    <div class="item">
+        <span class="label">Associated Symptoms:</span>
+        {{ patient.associated_symptoms }}
+    </div>
+
+    <div class="item">
+        <span class="label">Factors:</span>
+        {{ patient.factors }}
+    </div>
 
 
     <h2>Medical History</h2>
@@ -120,7 +183,9 @@
     <p>{{ patient.personal_history }}</p>
 
 
-    <a href="/" class="back">Back to Patient Form</a>
+    <a href="/" class="back">
+        Back to Patient Form
+    </a>
 
 </div>
 
