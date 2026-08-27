@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>AI Patient Case Taking System</title>
+</head>
+
+<body>
+
+    <h1>AI Patient Case Taking System</h1>
+
+    <p>Enter the patient's details below.</p>
+
+    <form action="/submit" method="POST">
+
+        <label>Patient Name:</label>
+        <input type="text" name="patient_name" required>
+
+        <br><br>
+
+        <label>Age:</label>
+        <input type="number" name="age" required>
+
+        <br><br>
+
+        <label>Symptoms:</label>
+        <br>
+        <textarea name="symptoms" rows="5" cols="40" required></textarea>
+
+        <br><br>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+</body>
+</html>
