@@ -1,34 +1,23 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def home():
-    return jsonify({
-        "message": "MediKiosk Backend is running"
-    })
+    return render_template("index.html")
 
+@app.route("/submit", methods=["POST"])
+def submit():
+    name = request.form["patient_name"]
+    age = request.form["age"]
+    symptoms = request.form["symptoms"]
 
-@app.route("/patient", methods=["POST"])
-def patient():
-    data = request.get_json()
-
-    name = data.get("name")
-    age = data.get("age")
-    gender = data.get("gender")
-    symptoms = data.get("symptoms")
-
-    return jsonify({
-        "message": "Patient information received",
-        "patient": {
-            "name": name,
-            "age": age,
-            "gender": gender,
-            "symptoms": symptoms
-        }
-    })
-
+    return f"""
+    <h1>Patient Details</h1>
+    <p>Name: {name}</p>
+    <p>Age: {age}</p>
+    <p>Symptoms: {symptoms}</p>
+    """
 
 if __name__ == "__main__":
     app.run(debug=True)
