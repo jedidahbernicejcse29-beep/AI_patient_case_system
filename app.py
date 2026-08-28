@@ -9,7 +9,7 @@ import pytesseract
 
 
 # ============================================================
-# PROJECT PATH
+# CONNECT TO ai_model
 # ============================================================
 
 PROJECT_FOLDER = os.path.dirname(
@@ -18,12 +18,7 @@ PROJECT_FOLDER = os.path.dirname(
     )
 )
 
-sys.path.insert(0, PROJECT_FOLDER)
-
-
-# ============================================================
-# AI MODEL
-# ============================================================
+sys.path.append(PROJECT_FOLDER)
 
 from ai_model.clinical_model import analyze_patient
 
@@ -42,7 +37,7 @@ from database import (
 
 
 # ============================================================
-# FLASK APP
+# FLASK
 # ============================================================
 
 app = Flask(__name__)
@@ -75,7 +70,7 @@ pytesseract.pytesseract.tesseract_cmd = (
 
 
 # ============================================================
-# ALLOWED FILE TYPES
+# ALLOWED FILES
 # ============================================================
 
 ALLOWED_EXTENSIONS = {
@@ -97,25 +92,36 @@ def allowed_file(filename):
 
 
 # ============================================================
-# OCR PATIENT DETAILS
+# OCR DETAIL EXTRACTION
 # ============================================================
 
 def extract_patient_details(text):
 
     patient = {
+
         "name": "",
+
         "age": "",
+
         "gender": "",
+
         "chief_complaint": "",
+
         "duration": "",
+
         "symptoms": ""
     }
 
-    for line in text.splitlines():
+
+    lines = text.splitlines()
+
+
+    for line in lines:
 
         line = line.strip()
 
         lower = line.lower()
+
 
         if lower.startswith("patient name:"):
 
@@ -123,11 +129,13 @@ def extract_patient_details(text):
                 line.split(":", 1)[1].strip()
             )
 
+
         elif lower.startswith("name:"):
 
             patient["name"] = (
                 line.split(":", 1)[1].strip()
             )
+
 
         elif lower.startswith("age:"):
 
@@ -135,11 +143,13 @@ def extract_patient_details(text):
                 line.split(":", 1)[1].strip()
             )
 
+
         elif lower.startswith("gender:"):
 
             patient["gender"] = (
                 line.split(":", 1)[1].strip()
             )
+
 
         elif lower.startswith("chief complaint:"):
 
@@ -147,11 +157,13 @@ def extract_patient_details(text):
                 line.split(":", 1)[1].strip()
             )
 
+
         elif lower.startswith("duration:"):
 
             patient["duration"] = (
                 line.split(":", 1)[1].strip()
             )
+
 
         elif lower.startswith("symptoms:"):
 
@@ -159,29 +171,12 @@ def extract_patient_details(text):
                 line.split(":", 1)[1].strip()
             )
 
+
     return patient
 
 
 # ============================================================
-# DASHBOARD
-# ============================================================
-
-@app.route("/dashboard")
-def dashboard():
-
-    patients = get_patients()
-
-    ayush_records = get_ayush_history()
-
-    return render_template(
-        "dashboard.html",
-        patients=patients,
-        ayush_records=ayush_records
-    )
-
-
-# ============================================================
-# HOME / PATIENT FORM
+# HOME
 # ============================================================
 
 @app.route("/")
@@ -193,7 +188,7 @@ def home():
 
 
 # ============================================================
-# PATIENT FORM SUBMIT
+# PATIENT FORM
 # ============================================================
 
 @app.route(
@@ -204,66 +199,79 @@ def submit():
 
     patient = {
 
-        "name": request.form.get(
-            "patient_name",
-            ""
-        ),
+        "name":
+            request.form.get(
+                "patient_name",
+                ""
+            ),
 
-        "age": request.form.get(
-            "age",
-            ""
-        ),
+        "age":
+            request.form.get(
+                "age",
+                ""
+            ),
 
-        "gender": request.form.get(
-            "gender",
-            ""
-        ),
+        "gender":
+            request.form.get(
+                "gender",
+                ""
+            ),
 
-        "chief_complaint": request.form.get(
-            "chief_complaint",
-            ""
-        ),
+        "chief_complaint":
+            request.form.get(
+                "chief_complaint",
+                ""
+            ),
 
-        "duration": request.form.get(
-            "duration",
-            ""
-        ),
+        "duration":
+            request.form.get(
+                "duration",
+                ""
+            ),
 
-        "symptoms": request.form.get(
-            "symptoms",
-            ""
-        ),
+        "symptoms":
+            request.form.get(
+                "symptoms",
+                ""
+            ),
 
-        "medical_history": request.form.get(
-            "medical_history",
-            ""
-        ),
+        "medical_history":
+            request.form.get(
+                "medical_history",
+                ""
+            ),
 
-        "surgical_history": request.form.get(
-            "surgical_history",
-            ""
-        ),
+        "surgical_history":
+            request.form.get(
+                "surgical_history",
+                ""
+            ),
 
-        "medications": request.form.get(
-            "medications",
-            ""
-        ),
+        "medications":
+            request.form.get(
+                "medications",
+                ""
+            ),
 
-        "allergies": request.form.get(
-            "allergies",
-            ""
-        ),
+        "allergies":
+            request.form.get(
+                "allergies",
+                ""
+            ),
 
-        "family_history": request.form.get(
-            "family_history",
-            ""
-        ),
+        "family_history":
+            request.form.get(
+                "family_history",
+                ""
+            ),
 
-        "personal_history": request.form.get(
-            "personal_history",
-            ""
-        )
+        "personal_history":
+            request.form.get(
+                "personal_history",
+                ""
+            )
     }
+
 
     return render_template(
         "questions.html",
@@ -283,90 +291,106 @@ def questions():
 
     patient = {
 
-        "name": request.form.get(
-            "name",
-            ""
-        ),
+        "name":
+            request.form.get(
+                "name",
+                ""
+            ),
 
-        "age": request.form.get(
-            "age",
-            ""
-        ),
+        "age":
+            request.form.get(
+                "age",
+                ""
+            ),
 
-        "gender": request.form.get(
-            "gender",
-            ""
-        ),
+        "gender":
+            request.form.get(
+                "gender",
+                ""
+            ),
 
-        "chief_complaint": request.form.get(
-            "chief_complaint",
-            ""
-        ),
+        "chief_complaint":
+            request.form.get(
+                "chief_complaint",
+                ""
+            ),
 
-        "duration": request.form.get(
-            "duration",
-            ""
-        ),
+        "duration":
+            request.form.get(
+                "duration",
+                ""
+            ),
 
-        "symptoms": request.form.get(
-            "symptoms",
-            ""
-        ),
+        "symptoms":
+            request.form.get(
+                "symptoms",
+                ""
+            ),
 
-        "onset": request.form.get(
-            "onset",
-            ""
-        ),
+        "medical_history":
+            request.form.get(
+                "medical_history",
+                ""
+            ),
 
-        "severity": request.form.get(
-            "severity",
-            ""
-        ),
+        "surgical_history":
+            request.form.get(
+                "surgical_history",
+                ""
+            ),
 
-        "associated_symptoms": request.form.get(
-            "associated_symptoms",
-            ""
-        ),
+        "medications":
+            request.form.get(
+                "medications",
+                ""
+            ),
 
-        "factors": request.form.get(
-            "factors",
-            ""
-        ),
+        "allergies":
+            request.form.get(
+                "allergies",
+                ""
+            ),
 
-        "medical_history": request.form.get(
-            "medical_history",
-            ""
-        ),
+        "family_history":
+            request.form.get(
+                "family_history",
+                ""
+            ),
 
-        "surgical_history": request.form.get(
-            "surgical_history",
-            ""
-        ),
+        "personal_history":
+            request.form.get(
+                "personal_history",
+                ""
+            ),
 
-        "medications": request.form.get(
-            "medications",
-            ""
-        ),
+        "onset":
+            request.form.get(
+                "onset",
+                ""
+            ),
 
-        "allergies": request.form.get(
-            "allergies",
-            ""
-        ),
+        "severity":
+            request.form.get(
+                "severity",
+                ""
+            ),
 
-        "family_history": request.form.get(
-            "family_history",
-            ""
-        ),
+        "associated_symptoms":
+            request.form.get(
+                "associated_symptoms",
+                ""
+            ),
 
-        "personal_history": request.form.get(
-            "personal_history",
-            ""
-        )
+        "factors":
+            request.form.get(
+                "factors",
+                ""
+            )
     }
 
 
     # ========================================================
-    # AI ANALYSIS
+    # AI MODEL
     # ========================================================
 
     ai_result = analyze_patient(
@@ -374,26 +398,16 @@ def questions():
     )
 
 
-    patient["ai_priority"] = ai_result.get(
-        "priority",
-        "Routine assessment"
+    patient["ai_priority"] = (
+        ai_result["priority"]
     )
 
-
-    patient["ai_red_flags"] = ai_result.get(
-        "red_flags",
-        []
+    patient["ai_red_flags"] = (
+        ai_result["red_flags"]
     )
 
-
-    patient["ai_symptoms"] = ai_result.get(
-        "symptoms",
-        ""
-    )
-
-
-    patient["red_flag"] = bool(
-        patient["ai_red_flags"]
+    patient["ai_symptoms"] = (
+        ai_result["symptoms"]
     )
 
 
@@ -401,14 +415,22 @@ def questions():
     # SAVE PATIENT
     # ========================================================
 
-    save_patient(
+    patient_id = save_patient(
         patient
     )
 
 
+    patient["patient_id"] = patient_id
+
+
     # ========================================================
-    # SHOW SUMMARY
+    # RED FLAG STATUS
     # ========================================================
+
+    patient["red_flag"] = bool(
+        ai_result["red_flags"]
+    )
+
 
     return render_template(
         "summary.html",
@@ -417,7 +439,7 @@ def questions():
 
 
 # ============================================================
-# PATIENT RECORDS
+# PATIENT + AYUSH RECORDS
 # ============================================================
 
 @app.route("/records")
@@ -427,10 +449,15 @@ def records():
 
     history = get_ayush_history()
 
+
     return render_template(
+
         "records.html",
+
         patients=patients,
+
         history=history
+
     )
 
 
@@ -448,57 +475,71 @@ def ayush():
 
         ayush_data = {
 
-            "prakriti": request.form.get(
-                "prakriti",
-                ""
-            ),
+            "prakriti":
+                request.form.get(
+                    "prakriti",
+                    ""
+                ),
 
-            "vikriti": request.form.get(
-                "vikriti",
-                ""
-            ),
+            "vikriti":
+                request.form.get(
+                    "vikriti",
+                    ""
+                ),
 
-            "sara": request.form.get(
-                "sara",
-                ""
-            ),
+            "sara":
+                request.form.get(
+                    "sara",
+                    ""
+                ),
 
-            "samhanana": request.form.get(
-                "samhanana",
-                ""
-            ),
+            "samhanana":
+                request.form.get(
+                    "samhanana",
+                    ""
+                ),
 
-            "pramana": request.form.get(
-                "pramana",
-                ""
-            ),
+            "pramana":
+                request.form.get(
+                    "pramana",
+                    ""
+                ),
 
-            "satmya": request.form.get(
-                "satmya",
-                ""
-            ),
+            "satmya":
+                request.form.get(
+                    "satmya",
+                    ""
+                ),
 
-            "sattva": request.form.get(
-                "sattva",
-                ""
-            ),
+            "sattva":
+                request.form.get(
+                    "sattva",
+                    ""
+                ),
 
-            "ahara_shakti": request.form.get(
-                "ahara_shakti",
-                ""
-            ),
+            "ahara_shakti":
+                request.form.get(
+                    "ahara_shakti",
+                    ""
+                ),
 
-            "vyayama_shakti": request.form.get(
-                "vyayama_shakti",
-                ""
-            ),
+            "vyayama_shakti":
+                request.form.get(
+                    "vyayama_shakti",
+                    ""
+                ),
 
-            "vaya": request.form.get(
-                "vaya",
-                ""
-            )
+            "vaya":
+                request.form.get(
+                    "vaya",
+                    ""
+                )
         }
 
+
+        # ====================================================
+        # GET LATEST PATIENT
+        # ====================================================
 
         patients = get_patients()
 
@@ -514,8 +555,11 @@ def ayush():
 
 
         return render_template(
+
             "ayush_summary.html",
+
             ayush=ayush_data
+
         )
 
 
@@ -533,14 +577,18 @@ def ayush_records():
 
     history = get_ayush_history()
 
+
     return render_template(
+
         "ayush_records.html",
+
         history=history
+
     )
 
 
 # ============================================================
-# MEDICAL DOCUMENT UPLOAD
+# UPLOAD MEDICAL DOCUMENT
 # ============================================================
 
 @app.route(
@@ -550,6 +598,7 @@ def ayush_records():
 def upload():
 
     if request.method == "POST":
+
 
         if "document" not in request.files:
 
@@ -577,8 +626,13 @@ def upload():
 
 
         file_path = os.path.join(
-            app.config["UPLOAD_FOLDER"],
+
+            app.config[
+                "UPLOAD_FOLDER"
+            ],
+
             filename
+
         )
 
 
@@ -595,11 +649,13 @@ def upload():
         # ====================================================
 
         if filename.lower().endswith(
+
             (
                 ".png",
                 ".jpg",
                 ".jpeg"
             )
+
         ):
 
             image = Image.open(
@@ -608,9 +664,11 @@ def upload():
 
 
             extracted_text = (
+
                 pytesseract.image_to_string(
                     image
                 )
+
             )
 
 
@@ -635,20 +693,38 @@ def upload():
         ):
 
             extracted_text = (
-                "PDF uploaded successfully."
+
+                "PDF uploaded successfully.\n\n"
+
+                "PDF text extraction will "
+                "be added later."
+
             )
 
+
+        # ====================================================
+        # EXTRACT PATIENT DETAILS
+        # ====================================================
 
         patient = extract_patient_details(
             extracted_text
         )
 
 
+        # ====================================================
+        # OCR RESULT
+        # ====================================================
+
         return render_template(
+
             "ocr_result.html",
+
             filename=filename,
+
             extracted_text=extracted_text,
+
             patient=patient
+
         )
 
 
@@ -669,35 +745,41 @@ def ocr_to_form():
 
     patient = {
 
-        "name": request.form.get(
-            "patient_name",
-            ""
-        ),
+        "name":
+            request.form.get(
+                "patient_name",
+                ""
+            ),
 
-        "age": request.form.get(
-            "age",
-            ""
-        ),
+        "age":
+            request.form.get(
+                "age",
+                ""
+            ),
 
-        "gender": request.form.get(
-            "gender",
-            ""
-        ),
+        "gender":
+            request.form.get(
+                "gender",
+                ""
+            ),
 
-        "chief_complaint": request.form.get(
-            "chief_complaint",
-            ""
-        ),
+        "chief_complaint":
+            request.form.get(
+                "chief_complaint",
+                ""
+            ),
 
-        "duration": request.form.get(
-            "duration",
-            ""
-        ),
+        "duration":
+            request.form.get(
+                "duration",
+                ""
+            ),
 
-        "symptoms": request.form.get(
-            "symptoms",
-            ""
-        ),
+        "symptoms":
+            request.form.get(
+                "symptoms",
+                ""
+            ),
 
         "medical_history": "",
 
@@ -714,8 +796,11 @@ def ocr_to_form():
 
 
     return render_template(
+
         "index.html",
+
         patient=patient
+
     )
 
 
@@ -727,7 +812,7 @@ create_database()
 
 
 # ============================================================
-# RUN APPLICATION
+# START APPLICATION
 # ============================================================
 
 if __name__ == "__main__":
@@ -735,6 +820,4 @@ if __name__ == "__main__":
     app.run(
         debug=True
     )
-
-
 

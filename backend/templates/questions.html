@@ -1,113 +1,286 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MediKiosk - Guided Questions</title>
+    <title>Care AI - Guided Clinical History</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f7f9;
             margin: 0;
-            padding: 40px;
+            background: #f4f7f9;
+        }
+
+        header {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            color: #666;
         }
 
         .container {
-            max-width: 700px;
-            margin: auto;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
             background: white;
-            padding: 35px;
+            padding: 30px;
             border-radius: 12px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .question {
-            margin-top: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         label {
             display: block;
+            margin-top: 18px;
+            margin-bottom: 6px;
             font-weight: bold;
-            margin-bottom: 8px;
         }
 
         input,
+        select,
         textarea {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 15px;
         }
 
         textarea {
-            min-height: 100px;
+            min-height: 80px;
+            resize: vertical;
         }
 
         button {
+            width: 100%;
             margin-top: 25px;
-            padding: 12px 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .links a {
+            margin: 5px;
+            text-decoration: none;
+        }
     </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<header>
 
-    <h1>MediKiosk</h1>
+    <h1>Care AI</h1>
 
-    <p style="text-align:center;">
+    <p>
         Guided Clinical History
     </p>
 
-    <form action="/questions" method="POST">
+</header>
 
-        <!-- Keep original patient information -->
-        <input type="hidden" name="name" value="{{ patient.name }}">
-        <input type="hidden" name="age" value="{{ patient.age }}">
-        <input type="hidden" name="gender" value="{{ patient.gender }}">
-        <input type="hidden" name="chief_complaint" value="{{ patient.chief_complaint }}">
-        <input type="hidden" name="duration" value="{{ patient.duration }}">
-        <input type="hidden" name="symptoms" value="{{ patient.symptoms }}">
-        <input type="hidden" name="medical_history" value="{{ patient.medical_history }}">
-        <input type="hidden" name="surgical_history" value="{{ patient.surgical_history }}">
-        <input type="hidden" name="medications" value="{{ patient.medications }}">
-        <input type="hidden" name="allergies" value="{{ patient.allergies }}">
-        <input type="hidden" name="family_history" value="{{ patient.family_history }}">
-        <input type="hidden" name="personal_history" value="{{ patient.personal_history }}">
 
-        <div class="question">
-            <label>When did your symptoms begin?</label>
-            <input type="text" name="onset" required>
+<div class="container">
+
+    <div class="card">
+
+        <h2>Clinical Information</h2>
+
+        <form action="/questions" method="POST">
+
+            <input
+                type="hidden"
+                name="name"
+                value="{{ patient.name }}"
+            >
+
+            <input
+                type="hidden"
+                name="age"
+                value="{{ patient.age }}"
+            >
+
+            <input
+                type="hidden"
+                name="gender"
+                value="{{ patient.gender }}"
+            >
+
+            <input
+                type="hidden"
+                name="chief_complaint"
+                value="{{ patient.chief_complaint }}"
+            >
+
+            <input
+                type="hidden"
+                name="duration"
+                value="{{ patient.duration }}"
+            >
+
+            <input
+                type="hidden"
+                name="symptoms"
+                value="{{ patient.symptoms }}"
+            >
+
+            <input
+                type="hidden"
+                name="medical_history"
+                value="{{ patient.medical_history }}"
+            >
+
+            <input
+                type="hidden"
+                name="surgical_history"
+                value="{{ patient.surgical_history }}"
+            >
+
+            <input
+                type="hidden"
+                name="medications"
+                value="{{ patient.medications }}"
+            >
+
+            <input
+                type="hidden"
+                name="allergies"
+                value="{{ patient.allergies }}"
+            >
+
+            <input
+                type="hidden"
+                name="family_history"
+                value="{{ patient.family_history }}"
+            >
+
+            <input
+                type="hidden"
+                name="personal_history"
+                value="{{ patient.personal_history }}"
+            >
+
+
+            <label for="onset">
+                Symptom Onset
+            </label>
+
+            <input
+                type="text"
+                id="onset"
+                name="onset"
+                placeholder="Example: 2 days ago"
+                required
+            >
+
+
+            <label for="severity">
+                Severity
+            </label>
+
+            <select
+                id="severity"
+                name="severity"
+                required
+            >
+
+                <option value="">
+                    Select Severity
+                </option>
+
+                <option value="Mild">
+                    Mild
+                </option>
+
+                <option value="Moderate">
+                    Moderate
+                </option>
+
+                <option value="Severe">
+                    Severe
+                </option>
+
+            </select>
+
+
+            <label for="associated_symptoms">
+                Associated Symptoms
+            </label>
+
+            <textarea
+                id="associated_symptoms"
+                name="associated_symptoms"
+                placeholder="Example: tiredness, cough, headache"
+            ></textarea>
+
+
+            <label for="factors">
+                Factors
+            </label>
+
+            <textarea
+                id="factors"
+                name="factors"
+                placeholder="Example: better when rested"
+            ></textarea>
+
+
+            <button type="submit">
+                Analyze Patient
+            </button>
+
+        </form>
+
+
+        <div class="links">
+
+            <a href="/">
+                Back to Patient Form
+            </a>
+
+            |
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            |
+
+            <a href="/records">
+                Patient Records
+            </a>
+
         </div>
 
-        <div class="question">
-            <label>How severe are your symptoms?</label>
-            <input type="text" name="severity" required>
-        </div>
-
-        <div class="question">
-            <label>Do you have any other symptoms?</label>
-            <textarea name="associated_symptoms"></textarea>
-        </div>
-
-        <div class="question">
-            <label>What makes your symptoms better or worse?</label>
-            <textarea name="factors"></textarea>
-        </div>
-
-        <button type="submit">
-            Continue to Summary
-        </button>
-
-    </form>
+    </div>
 
 </div>
 
 </body>
+
 </html>
+```

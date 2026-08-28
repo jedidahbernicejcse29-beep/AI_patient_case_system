@@ -1,73 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>MediKiosk Patient Case System</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - Clinical History</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 25px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
+<div class="container">
+
     <h1>MediKiosk</h1>
-    <h2>Patient Case Taking System</h2>
+    <p style="text-align:center;">
+        AI Clinical History Taking System
+    </p>
 
     <form id="patientForm">
 
-        <label>Name:</label>
+        <h2>1. Patient Information</h2>
+
+        <label>Name</label>
         <input type="text" id="name" required>
-        <br><br>
 
-        <label>Age:</label>
+        <label>Age</label>
         <input type="number" id="age" required>
-        <br><br>
 
-        <label>Gender:</label>
+        <label>Gender</label>
         <select id="gender">
+            <option value="">Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
         </select>
-        <br><br>
 
-        <label>Symptoms:</label>
-        <input type="text" id="symptoms" required>
-        <br><br>
+        <h2>2. Chief Complaint</h2>
 
-        <button type="submit">Submit</button>
+        <label>What is the main problem you are experiencing?</label>
+        <textarea id="chief_complaint" required></textarea>
+
+        <label>When did it start?</label>
+        <input type="text" id="duration">
+
+        <h2>3. Symptoms</h2>
+
+        <label>Describe your symptoms</label>
+        <textarea id="symptoms" required></textarea>
+
+        <h2>4. Medical History</h2>
+
+        <label>Previous medical conditions</label>
+        <textarea id="medical_history"></textarea>
+
+        <label>Previous surgeries</label>
+        <textarea id="surgical_history"></textarea>
+
+        <label>Current medications</label>
+        <textarea id="medications"></textarea>
+
+        <label>Known allergies</label>
+        <textarea id="allergies"></textarea>
+
+        <h2>5. Family History</h2>
+
+        <label>Important illnesses in your family</label>
+        <textarea id="family_history"></textarea>
+
+        <h2>6. Personal History</h2>
+
+        <label>Other relevant information</label>
+        <textarea id="personal_history"></textarea>
+
+        <button type="submit">
+            Submit Clinical History
+        </button>
 
     </form>
 
     <p id="result"></p>
 
-    <script>
-        document.getElementById("patientForm").addEventListener("submit", function(event) {
+</div>
 
-            event.preventDefault();
+<script>
 
-            const patientData = {
-                name: document.getElementById("name").value,
-                age: document.getElementById("age").value,
-                gender: document.getElementById("gender").value,
-                symptoms: document.getElementById("symptoms").value
-            };
+document.getElementById("patientForm").addEventListener("submit", function(event) {
 
-            fetch("http://127.0.0.1:5000/patient", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(patientData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("result").innerText =
-                    data.message;
-            })
-            .catch(error => {
-                document.getElementById("result").innerText =
-                    "Error connecting to backend";
-            });
+    event.preventDefault();
 
-        });
-    </script>
+    const patientData = {
+
+        name: document.getElementById("name").value,
+
+        age: document.getElementById("age").value,
+
+        gender: document.getElementById("gender").value,
+
+        chief_complaint:
+            document.getElementById("chief_complaint").value,
+
+        duration:
+            document.getElementById("duration").value,
+
+        symptoms:
+            document.getElementById("symptoms").value,
+
+        medical_history:
+            document.getElementById("medical_history").value,
+
+        surgical_history:
+            document.getElementById("surgical_history").value,
+
+        medications:
+            document.getElementById("medications").value,
+
+        allergies:
+            document.getElementById("allergies").value,
+
+        family_history:
+            document.getElementById("family_history").value,
+
+        personal_history:
+            document.getElementById("personal_history").value
+    };
+
+    fetch("http://127.0.0.1:5000/patient", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(patientData)
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        document.getElementById("result").innerText =
+            data.message;
+
+    })
+
+    .catch(error => {
+
+        document.getElementById("result").innerText =
+            "Error connecting to backend";
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>

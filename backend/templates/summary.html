@@ -1,193 +1,317 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MediKiosk - Clinical Summary</title>
+    <title>Care AI - Clinical Analysis</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f4f7f9;
             margin: 0;
-            padding: 40px;
+            background: #f4f7f9;
+        }
+
+        header {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            color: #666;
         }
 
         .container {
             max-width: 850px;
-            margin: auto;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
             background: white;
-            padding: 35px;
+            padding: 25px;
+            margin-bottom: 20px;
             border-radius: 12px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-        }
-
-        .alert {
-            margin-top: 25px;
-            padding: 18px;
-            border: 2px solid #b00020;
-            border-radius: 8px;
-        }
-
-        .alert h2 {
-            color: #b00020;
-            border: none;
-            margin-top: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         h2 {
-            margin-top: 30px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 8px;
+            margin-top: 0;
         }
 
         .item {
-            margin: 10px 0;
+            padding: 8px 0;
         }
 
-        .label {
+        .priority {
+            font-size: 20px;
             font-weight: bold;
         }
 
-        .back {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 10px 20px;
+        .warning {
+            font-weight: bold;
+        }
+
+        .links {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .links a {
+            margin: 6px;
             text-decoration: none;
-            border: 1px solid #333;
+        }
+
+        ul {
+            padding-left: 25px;
         }
     </style>
+
 </head>
 
 <body>
 
-<div class="container">
+<header>
 
-    <h1>MediKiosk</h1>
+    <h1>Care AI</h1>
 
-    <p class="subtitle">
-        Clinical History Summary
+    <p>
+        AI-Powered Clinical Analysis
     </p>
 
+</header>
 
-    <!-- Red Flag Alert -->
 
-    {% if patient.red_flag %}
-    <div class="alert">
+<div class="container">
 
-        <h2>PRIORITY ALERT</h2>
 
-        <p>
-            Potential urgent symptoms detected.
+    <!-- PATIENT INFORMATION -->
+
+    <div class="card">
+
+        <h2>Patient Information</h2>
+
+        <div class="item">
+            <strong>Name:</strong>
+            {{ patient.name }}
+        </div>
+
+        <div class="item">
+            <strong>Age:</strong>
+            {{ patient.age }}
+        </div>
+
+        <div class="item">
+            <strong>Gender:</strong>
+            {{ patient.gender }}
+        </div>
+
+    </div>
+
+
+    <!-- CHIEF COMPLAINT -->
+
+    <div class="card">
+
+        <h2>Chief Complaint</h2>
+
+        <div class="item">
+            {{ patient.chief_complaint }}
+        </div>
+
+        <div class="item">
+            <strong>Duration:</strong>
+            {{ patient.duration }}
+        </div>
+
+        <div class="item">
+            <strong>Symptoms:</strong>
+            {{ patient.symptoms }}
+        </div>
+
+    </div>
+
+
+    <!-- GUIDED HISTORY -->
+
+    <div class="card">
+
+        <h2>Guided Clinical History</h2>
+
+        <div class="item">
+            <strong>Symptom Onset:</strong>
+            {{ patient.onset }}
+        </div>
+
+        <div class="item">
+            <strong>Severity:</strong>
+            {{ patient.severity }}
+        </div>
+
+        <div class="item">
+            <strong>Associated Symptoms:</strong>
+            {{ patient.associated_symptoms }}
+        </div>
+
+        <div class="item">
+            <strong>Factors:</strong>
+            {{ patient.factors }}
+        </div>
+
+    </div>
+
+
+    <!-- MEDICAL HISTORY -->
+
+    <div class="card">
+
+        <h2>Medical History</h2>
+
+        <div class="item">
+            <strong>Medical History:</strong>
+            {{ patient.medical_history }}
+        </div>
+
+        <div class="item">
+            <strong>Surgical History:</strong>
+            {{ patient.surgical_history }}
+        </div>
+
+        <div class="item">
+            <strong>Medications:</strong>
+            {{ patient.medications }}
+        </div>
+
+        <div class="item">
+            <strong>Allergies:</strong>
+            {{ patient.allergies }}
+        </div>
+
+        <div class="item">
+            <strong>Family History:</strong>
+            {{ patient.family_history }}
+        </div>
+
+        <div class="item">
+            <strong>Personal History:</strong>
+            {{ patient.personal_history }}
+        </div>
+
+    </div>
+
+
+    <!-- AI ANALYSIS -->
+
+    <div class="card">
+
+        <h2>AI Clinical Analysis</h2>
+
+        <div class="item priority">
+
+            Priority:
+
+            {{ patient.ai_priority }}
+
+        </div>
+
+
+        <div class="item">
+
+            <strong>Detected Red Flags:</strong>
+
+            {% if patient.ai_red_flags %}
+
+                <ul>
+
+                {% for flag in patient.ai_red_flags %}
+
+                    <li>
+                        {{ flag }}
+                    </li>
+
+                {% endfor %}
+
+                </ul>
+
+            {% else %}
+
+                <p>
+                    No predefined red-flag terms detected.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="item">
+
+            <strong>Symptoms analyzed:</strong>
+
+            {{ patient.ai_symptoms }}
+
+        </div>
+
+
+        <p class="warning">
+
+            Note: This AI feature is a prototype for
+            organizing clinical information and identifying
+            predefined warning terms. It is not a medical diagnosis.
+
         </p>
 
-        <p>
-            Please notify the clinical or triage staff for appropriate assessment.
-        </p>
-
-    </div>
-    {% endif %}
-
-
-    <h2>Patient Information</h2>
-
-    <div class="item">
-        <span class="label">Name:</span>
-        {{ patient.name }}
-    </div>
-
-    <div class="item">
-        <span class="label">Age:</span>
-        {{ patient.age }}
-    </div>
-
-    <div class="item">
-        <span class="label">Gender:</span>
-        {{ patient.gender }}
     </div>
 
 
-    <h2>Chief Complaint</h2>
+    <!-- NAVIGATION -->
 
-    <p>{{ patient.chief_complaint }}</p>
+    <div class="links">
 
+        <a href="/">
+            Back to Patient Form
+        </a>
 
-    <h2>Duration</h2>
+        |
 
-    <p>{{ patient.duration }}</p>
+        <a href="/dashboard">
+            Dashboard
+        </a>
 
+        |
 
-    <h2>Symptoms</h2>
+        <a href="/records">
+            Patient Records
+        </a>
 
-    <p>{{ patient.symptoms }}</p>
+        |
 
+        <a href="/ayush">
+            AYUSH Form
+        </a>
 
-    <h2>Guided Clinical History</h2>
+        |
 
-    <div class="item">
-        <span class="label">Symptom Onset:</span>
-        {{ patient.onset }}
+        <a href="/upload">
+            Upload Document
+        </a>
+
     </div>
 
-    <div class="item">
-        <span class="label">Severity:</span>
-        {{ patient.severity }}
-    </div>
-
-    <div class="item">
-        <span class="label">Associated Symptoms:</span>
-        {{ patient.associated_symptoms }}
-    </div>
-
-    <div class="item">
-        <span class="label">Factors:</span>
-        {{ patient.factors }}
-    </div>
-
-
-    <h2>Medical History</h2>
-
-    <p>{{ patient.medical_history }}</p>
-
-
-    <h2>Surgical History</h2>
-
-    <p>{{ patient.surgical_history }}</p>
-
-
-    <h2>Medications</h2>
-
-    <p>{{ patient.medications }}</p>
-
-
-    <h2>Allergies</h2>
-
-    <p>{{ patient.allergies }}</p>
-
-
-    <h2>Family History</h2>
-
-    <p>{{ patient.family_history }}</p>
-
-
-    <h2>Personal History</h2>
-
-    <p>{{ patient.personal_history }}</p>
-
-
-    <a href="/" class="back">
-        Back to Patient Form
-    </a>
 
 </div>
 
 </body>
+
 </html>

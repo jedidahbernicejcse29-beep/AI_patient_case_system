@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - Medical Documents</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .upload-box {
+            border: 2px dashed #999;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        input {
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 25px;
+            cursor: pointer;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 1px solid #333;
+        }
+
+        .info {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>MediKiosk</h1>
+
+    <p class="subtitle">
+        Medical Document Digitization
+    </p>
+
+    <div class="upload-box">
+
+        <h2>Upload Medical Document</h2>
+
+        <p>
+            Upload a prescription, lab report, or discharge summary.
+        </p>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="document"
+                accept=".pdf,.png,.jpg,.jpeg"
+                required
+            >
+
+            <br>
+
+            <button type="submit">
+                Upload Document
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="info">
+
+        <strong>Supported formats:</strong>
+
+        PDF, PNG, JPG, JPEG
+
+    </div>
+
+    <a href="/" class="back">
+        Back to Patient Form
+    </a>
+
+</div>
+
+</body>
+</html>

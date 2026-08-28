@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - OCR Result</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .item {
+            margin: 12px 0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .result {
+            white-space: pre-wrap;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 15px;
+            background: #fafafa;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            margin-right: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 1px solid #333;
+            color: black;
+            background: white;
+            cursor: pointer;
+        }
+
+        .use-button {
+            background: #333;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>MediKiosk</h1>
+
+    <p style="text-align:center;">
+        Medical Document Digitization
+    </p>
+
+    <h2>Extracted Patient Information</h2>
+
+    <div class="item">
+        <span class="label">Name:</span>
+        {{ patient.name or "Not detected" }}
+    </div>
+
+    <div class="item">
+        <span class="label">Age:</span>
+        {{ patient.age or "Not detected" }}
+    </div>
+
+    <div class="item">
+        <span class="label">Gender:</span>
+        {{ patient.gender or "Not detected" }}
+    </div>
+
+    <div class="item">
+        <span class="label">Chief Complaint:</span>
+        {{ patient.chief_complaint or "Not detected" }}
+    </div>
+
+    <div class="item">
+        <span class="label">Duration:</span>
+        {{ patient.duration or "Not detected" }}
+    </div>
+
+    <div class="item">
+        <span class="label">Symptoms:</span>
+        {{ patient.symptoms or "Not detected" }}
+    </div>
+
+
+    <h2>Raw OCR Text</h2>
+
+    <div class="result">
+{{ extracted_text }}
+    </div>
+
+
+    <!-- Send extracted details back to patient form -->
+
+    <form action="/ocr_to_form" method="POST">
+
+        <input
+            type="hidden"
+            name="patient_name"
+            value="{{ patient.name }}"
+        >
+
+        <input
+            type="hidden"
+            name="age"
+            value="{{ patient.age }}"
+        >
+
+        <input
+            type="hidden"
+            name="gender"
+            value="{{ patient.gender }}"
+        >
+
+        <input
+            type="hidden"
+            name="chief_complaint"
+            value="{{ patient.chief_complaint }}"
+        >
+
+        <input
+            type="hidden"
+            name="duration"
+            value="{{ patient.duration }}"
+        >
+
+        <input
+            type="hidden"
+            name="symptoms"
+            value="{{ patient.symptoms }}"
+        >
+
+        <button
+            type="submit"
+            class="button use-button"
+        >
+            Use These Details
+        </button>
+
+    </form>
+
+
+    <a href="/upload" class="button">
+        Upload Another Document
+    </a>
+
+    <a href="/" class="button">
+        Back to Patient Form
+    </a>
+
+</div>
+
+</body>
+
+</html>

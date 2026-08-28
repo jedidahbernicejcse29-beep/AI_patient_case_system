@@ -1,0 +1,322 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Care AI Dashboard</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f7f9;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .number {
+            font-size: 35px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: block;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #222;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #f0f0f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            font-weight: bold;
+        }
+
+        .empty {
+            color: #777;
+            padding: 15px 0;
+        }
+
+        .modules p {
+            margin: 10px 0;
+        }
+
+        @media (max-width: 700px) {
+
+            .cards,
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Care AI</h1>
+
+    <p>
+        AI-Powered Patient Case Management System
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- STATISTICS -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <h2>Total Patients</h2>
+
+            <div class="number">
+                {{ patients|length }}
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>AYUSH Records</h2>
+
+            <div class="number">
+                {{ ayush_records|length }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="card"
+         style="margin-top: 20px;">
+
+        <h2>Quick Actions</h2>
+
+        <div class="actions">
+
+            <a
+                href="/"
+                class="button">
+                New Patient
+            </a>
+
+            <a
+                href="/upload"
+                class="button">
+                Upload Medical Document
+            </a>
+
+            <a
+                href="/records"
+                class="button">
+                Patient Records
+            </a>
+
+            <a
+                href="/ayush_records"
+                class="button">
+                AYUSH Records
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECENT PATIENTS -->
+
+    <div class="card"
+         style="margin-top: 20px;">
+
+        <h2>Recent Patients</h2>
+
+
+        {% if patients %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Name</th>
+
+                    <th>Age</th>
+
+                    <th>Gender</th>
+
+                    <th>Complaint</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for patient in patients[:10] %}
+
+                <tr>
+
+                    <td>
+                        {{ patient.id }}
+                    </td>
+
+                    <td>
+                        {{ patient.name }}
+                    </td>
+
+                    <td>
+                        {{ patient.age }}
+                    </td>
+
+                    <td>
+                        {{ patient.gender }}
+                    </td>
+
+                    <td>
+                        {{ patient.chief_complaint }}
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <p class="empty">
+            No patients found.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- SYSTEM MODULES -->
+
+    <div class="card modules"
+         style="margin-top: 20px;">
+
+        <h2>System Modules</h2>
+
+        <p>Patient Case Taking</p>
+
+        <p>Guided Clinical History</p>
+
+        <p>AI Clinical Analysis</p>
+
+        <p>Red-Flag Detection</p>
+
+        <p>Medical Document OCR</p>
+
+        <p>AYUSH Clinical History</p>
+
+        <p>Patient Records</p>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
+```

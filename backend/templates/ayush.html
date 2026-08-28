@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - AYUSH History</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+        }
+
+        .field {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 70px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 25px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>MediKiosk</h1>
+
+    <p class="subtitle">
+        AYUSH History Mode
+    </p>
+
+    <p>
+        Please provide the following information for the AYUSH clinical history.
+    </p>
+
+    <form action="/ayush" method="POST">
+
+        <div class="field">
+            <label>1. Prakriti</label>
+            <input type="text" name="prakriti">
+        </div>
+
+        <div class="field">
+            <label>2. Vikriti</label>
+            <input type="text" name="vikriti">
+        </div>
+
+        <div class="field">
+            <label>3. Sara</label>
+            <input type="text" name="sara">
+        </div>
+
+        <div class="field">
+            <label>4. Samhanana</label>
+            <input type="text" name="samhanana">
+        </div>
+
+        <div class="field">
+            <label>5. Pramana</label>
+            <input type="text" name="pramana">
+        </div>
+
+        <div class="field">
+            <label>6. Satmya</label>
+            <input type="text" name="satmya">
+        </div>
+
+        <div class="field">
+            <label>7. Sattva</label>
+            <input type="text" name="sattva">
+        </div>
+
+        <div class="field">
+            <label>8. Ahara Shakti</label>
+            <input type="text" name="ahara_shakti">
+        </div>
+
+        <div class="field">
+            <label>9. Vyayama Shakti</label>
+            <input type="text" name="vyayama_shakti">
+        </div>
+
+        <div class="field">
+            <label>10. Vaya</label>
+            <input type="text" name="vaya">
+        </div>
+
+        <button type="submit">
+            Submit AYUSH History
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

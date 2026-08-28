@@ -1,0 +1,210 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - AYUSH Records</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #eeeeee;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #333;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>MediKiosk</h1>
+
+    <p class="subtitle">
+        AYUSH Clinical Records
+    </p>
+
+
+    {% if history %}
+
+    <table>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Patient ID</th>
+
+            <th>Prakriti</th>
+
+            <th>Vikriti</th>
+
+            <th>Sara</th>
+
+            <th>Samhanana</th>
+
+            <th>Pramana</th>
+
+            <th>Satmya</th>
+
+            <th>Sattva</th>
+
+            <th>Ahara Shakti</th>
+
+            <th>Vyayama Shakti</th>
+
+            <th>Vaya</th>
+
+        </tr>
+
+
+        {% for record in history %}
+
+        <tr>
+
+            <td>
+                {{ record["id"] }}
+            </td>
+
+            <td>
+                {{ record["patient_id"] }}
+            </td>
+
+            <td>
+                {{ record["prakriti"] }}
+            </td>
+
+            <td>
+                {{ record["vikriti"] }}
+            </td>
+
+            <td>
+                {{ record["sara"] }}
+            </td>
+
+            <td>
+                {{ record["samhanana"] }}
+            </td>
+
+            <td>
+                {{ record["pramana"] }}
+            </td>
+
+            <td>
+                {{ record["satmya"] }}
+            </td>
+
+            <td>
+                {{ record["sattva"] }}
+            </td>
+
+            <td>
+                {{ record["ahara_shakti"] }}
+            </td>
+
+            <td>
+                {{ record["vyayama_shakti"] }}
+            </td>
+
+            <td>
+                {{ record["vaya"] }}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+
+    {% else %}
+
+    <div class="empty">
+
+        <p>
+            No AYUSH records found.
+        </p>
+
+    </div>
+
+    {% endif %}
+
+
+    <a href="/records" class="back">
+        Back to Patient Records
+    </a>
+
+    <a href="/" class="back">
+        Back to Patient Form
+    </a>
+
+</div>
+
+</body>
+
+</html>
+```

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk - Upload Complete</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .success {
+            padding: 20px;
+            background: #eef7ee;
+            border-radius: 10px;
+            margin-top: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 20px;
+            text-decoration: none;
+            border: 1px solid #333;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>MediKiosk</h1>
+
+    <h2>Medical Document Upload</h2>
+
+    <div class="success">
+
+        <h3>Document Uploaded Successfully</h3>
+
+        <p>
+            File:
+            <strong>{{ filename }}</strong>
+        </p>
+
+    </div>
+
+    <a href="/upload" class="button">
+        Upload Another Document
+    </a>
+
+    <br>
+
+    <a href="/" class="button">
+        Back to Patient Form
+    </a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,43 +1,61 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MediKiosk - AI Clinical History</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Care AI - Patient Form</title>
 
     <style>
+
         body {
             font-family: Arial, sans-serif;
-            background: #f4f7f9;
             margin: 0;
-            padding: 40px;
+            background: #f4f7f9;
+        }
+
+        header {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            color: #666;
         }
 
         .container {
-            max-width: 850px;
-            margin: auto;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
             background: white;
-            padding: 35px;
+            padding: 30px;
             border-radius: 12px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         h2 {
-            margin-top: 30px;
+            margin-top: 0;
         }
 
         label {
             display: block;
-            margin-top: 15px;
+            margin-top: 18px;
+            margin-bottom: 6px;
             font-weight: bold;
         }
 
@@ -46,95 +64,259 @@
         textarea {
             width: 100%;
             padding: 11px;
-            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 15px;
         }
 
         textarea {
             min-height: 90px;
+            resize: vertical;
         }
 
         button {
+            width: 100%;
             margin-top: 25px;
-            padding: 13px 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .links a {
+            margin: 5px;
+            text-decoration: none;
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-<div class="container">
 
-    <h1>MediKiosk</h1>
+<header>
 
-    <p class="subtitle">
-        AI-Assisted Clinical History Taking System
+    <h1>Care AI</h1>
+
+    <p>
+        AI-Powered Patient Case Management System
     </p>
 
-    <form action="/submit" method="POST">
+</header>
 
-        <h2>1. Patient Information</h2>
 
-        <label>Patient Name</label>
-        <input type="text" name="patient_name" required>
+<div class="container">
 
-        <label>Age</label>
-        <input type="number" name="age" required>
 
-        <label>Gender</label>
-        <select name="gender">
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select>
+    <div class="card">
 
-        <h2>2. Chief Complaint</h2>
+        <h2>Patient Information</h2>
 
-        <label>What is your main health concern?</label>
-        <textarea name="chief_complaint" required></textarea>
 
-        <label>When did it start?</label>
-        <input type="text" name="duration">
+        <form
+            action="/submit"
+            method="POST">
 
-        <h2>3. Symptoms</h2>
 
-        <label>Please describe your symptoms</label>
-        <textarea name="symptoms" required></textarea>
+            <label for="patient_name">
+                Patient Name
+            </label>
 
-        <h2>4. Medical History</h2>
+            <input
+                type="text"
+                id="patient_name"
+                name="patient_name"
+                value="{{ patient.name if patient else '' }}"
+                required>
 
-        <label>Previous Medical Conditions</label>
-        <textarea name="medical_history"></textarea>
 
-        <label>Previous Surgeries</label>
-        <textarea name="surgical_history"></textarea>
+            <label for="age">
+                Age
+            </label>
 
-        <label>Current Medications</label>
-        <textarea name="medications"></textarea>
+            <input
+                type="number"
+                id="age"
+                name="age"
+                value="{{ patient.age if patient else '' }}"
+                required>
 
-        <label>Known Allergies</label>
-        <textarea name="allergies"></textarea>
 
-        <h2>5. Family History</h2>
+            <label for="gender">
+                Gender
+            </label>
 
-        <label>Relevant Family Medical History</label>
-        <textarea name="family_history"></textarea>
+            <select
+                id="gender"
+                name="gender"
+                required>
 
-        <h2>6. Personal History</h2>
+                <option value="">
+                    Select Gender
+                </option>
 
-        <label>Other Relevant Information</label>
-        <textarea name="personal_history"></textarea>
+                <option value="Male">
+                    Male
+                </option>
 
-        <button type="submit">
-            Submit Clinical History
-        </button>
+                <option value="Female">
+                    Female
+                </option>
 
-    </form>
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+
+            <label for="chief_complaint">
+                Chief Complaint
+            </label>
+
+            <input
+                type="text"
+                id="chief_complaint"
+                name="chief_complaint"
+                value="{{ patient.chief_complaint if patient else '' }}"
+                placeholder="Example: Fever"
+                required>
+
+
+            <label for="duration">
+                Duration
+            </label>
+
+            <input
+                type="text"
+                id="duration"
+                name="duration"
+                value="{{ patient.duration if patient else '' }}"
+                placeholder="Example: 2 days"
+                required>
+
+
+            <label for="symptoms">
+                Symptoms
+            </label>
+
+            <textarea
+                id="symptoms"
+                name="symptoms"
+                placeholder="Describe the symptoms">{{ patient.symptoms if patient else '' }}</textarea>
+
+
+            <h2 style="margin-top:30px;">
+                Medical History
+            </h2>
+
+
+            <label for="medical_history">
+                Medical History
+            </label>
+
+            <textarea
+                id="medical_history"
+                name="medical_history"></textarea>
+
+
+            <label for="surgical_history">
+                Surgical History
+            </label>
+
+            <textarea
+                id="surgical_history"
+                name="surgical_history"></textarea>
+
+
+            <label for="medications">
+                Medications
+            </label>
+
+            <textarea
+                id="medications"
+                name="medications"></textarea>
+
+
+            <label for="allergies">
+                Allergies
+            </label>
+
+            <textarea
+                id="allergies"
+                name="allergies"></textarea>
+
+
+            <label for="family_history">
+                Family History
+            </label>
+
+            <textarea
+                id="family_history"
+                name="family_history"></textarea>
+
+
+            <label for="personal_history">
+                Personal History
+            </label>
+
+            <textarea
+                id="personal_history"
+                name="personal_history"></textarea>
+
+
+            <button type="submit">
+                Continue to Guided Clinical History
+            </button>
+
+
+        </form>
+
+
+        <div class="links">
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            |
+
+            <a href="/records">
+                Patient Records
+            </a>
+
+            |
+
+            <a href="/ayush">
+                AYUSH Form
+            </a>
+
+            |
+
+            <a href="/upload">
+                Upload Document
+            </a>
+
+        </div>
+
+
+    </div>
+
 
 </div>
 
+
 </body>
+
 </html>
+

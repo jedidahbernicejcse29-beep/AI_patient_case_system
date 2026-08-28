@@ -4,4 +4,13 @@ __pycache__/
 .venv/
 venv/
 .vscode/
-.DS_store
+.DS_Store
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded documents
+backend/uploads/
+uploads/
