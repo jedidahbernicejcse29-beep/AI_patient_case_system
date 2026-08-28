@@ -1,6 +1,7 @@
 
 
-```html
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,83 +12,151 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Care AI Dashboard</title>
+    <title>Care AI | Dashboard</title>
 
     <style>
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f4f7f9;
+            background: #f5f7fb;
+            color: #1f2937;
         }
 
-        header {
+        /* TOP NAVIGATION */
+
+        .navbar {
             background: white;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 36px;
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
         }
 
-        header p {
-            color: #666;
-            font-size: 17px;
+        .nav-links {
+            display: flex;
+            gap: 20px;
         }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* MAIN CONTAINER */
 
         .container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 35px 20px;
         }
 
-        .cards {
+
+        /* WELCOME */
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .welcome p {
+            margin-top: 8px;
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+
+        /* STATISTICS */
+
+        .stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
-        .card {
+        .stat-card {
             background: white;
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
         }
 
-        .card h2 {
-            margin-top: 0;
+        .stat-card h3 {
+            margin: 0;
+            color: #6b7280;
+            font-size: 15px;
         }
 
-        .number {
-            font-size: 35px;
+        .stat-number {
+            font-size: 38px;
             font-weight: bold;
             margin-top: 10px;
         }
 
+
+        /* SECTION */
+
+        .section {
+            background: white;
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .section h2 {
+            margin-top: 0;
+        }
+
+
+        /* QUICK ACTIONS */
+
         .actions {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin-top: 20px;
         }
 
-        .button {
-            display: block;
-            padding: 15px;
-            text-align: center;
+        .action {
             text-decoration: none;
-            color: #222;
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            color: #1f2937;
+            border: 1px solid #d1d5db;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
             font-weight: bold;
+            background: #fafafa;
         }
 
-        .button:hover {
+        .action:hover {
             background: #f0f0f0;
+        }
+
+
+        /* TABLE */
+
+        .table-container {
+            overflow-x: auto;
         }
 
         table {
@@ -95,35 +164,86 @@
             border-collapse: collapse;
         }
 
-        th,
-        td {
-            padding: 12px;
+        th {
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            padding: 13px;
+            border-bottom: 2px solid #e5e7eb;
+            font-size: 14px;
         }
 
-        th {
-            font-weight: bold;
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #fafafa;
         }
 
         .empty {
-            color: #777;
-            padding: 15px 0;
+            color: #6b7280;
         }
 
-        .modules p {
-            margin: 10px 0;
+
+        /* MODULES */
+
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
 
-        @media (max-width: 700px) {
+        .module {
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #fafafa;
+        }
 
-            .cards,
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
             .actions {
                 grid-template-columns: 1fr;
             }
 
-            table {
-                font-size: 13px;
+            .modules {
+                grid-template-columns: 1fr;
             }
 
         }
@@ -132,82 +252,133 @@
 
 </head>
 
+
 <body>
 
-<header>
 
-    <h1>Care AI</h1>
+<!-- NAVIGATION -->
 
-    <p>
-        AI-Powered Patient Case Management System
-    </p>
+<nav class="navbar">
 
-</header>
+    <div class="logo">
+        Care AI
+    </div>
 
+    <div class="nav-links">
+
+        <a href="/">
+            Patient Form
+        </a>
+
+        <a href="/records">
+            Records
+        </a>
+
+        <a href="/ayush">
+            AYUSH
+        </a>
+
+        <a href="/upload">
+            Documents
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
 
 <div class="container">
 
 
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <h1>
+            Care AI Dashboard
+        </h1>
+
+        <p>
+            AI-Powered Patient Case Management System
+        </p>
+
+    </div>
+
+
     <!-- STATISTICS -->
 
-    <div class="cards">
+    <div class="stats">
 
-        <div class="card">
 
-            <h2>Total Patients</h2>
+        <div class="stat-card">
 
-            <div class="number">
+            <h3>
+                Total Patients
+            </h3>
+
+            <div class="stat-number">
                 {{ patients|length }}
             </div>
 
         </div>
 
 
-        <div class="card">
+        <div class="stat-card">
 
-            <h2>AYUSH Records</h2>
+            <h3>
+                AYUSH Records
+            </h3>
 
-            <div class="number">
+            <div class="stat-number">
                 {{ ayush_records|length }}
             </div>
 
         </div>
+
 
     </div>
 
 
     <!-- QUICK ACTIONS -->
 
-    <div class="card"
-         style="margin-top: 20px;">
+    <div class="section">
 
-        <h2>Quick Actions</h2>
+        <h2>
+            Quick Actions
+        </h2>
 
         <div class="actions">
 
-            <a
-                href="/"
-                class="button">
+
+            <a href="/" class="action">
+
                 New Patient
+
             </a>
 
-            <a
-                href="/upload"
-                class="button">
-                Upload Medical Document
-            </a>
 
-            <a
-                href="/records"
-                class="button">
+            <a href="/records" class="action">
+
                 Patient Records
+
             </a>
 
-            <a
-                href="/ayush_records"
-                class="button">
+
+            <a href="/ayush_records" class="action">
+
                 AYUSH Records
+
             </a>
+
+
+            <a href="/upload" class="action">
+
+                Upload Document
+
+            </a>
+
 
         </div>
 
@@ -216,73 +387,88 @@
 
     <!-- RECENT PATIENTS -->
 
-    <div class="card"
-         style="margin-top: 20px;">
+    <div class="section">
 
-        <h2>Recent Patients</h2>
+        <h2>
+            Recent Patients
+        </h2>
 
 
         {% if patients %}
 
-        <table>
+        <div class="table-container">
 
-            <thead>
+            <table>
 
-                <tr>
+                <thead>
 
-                    <th>ID</th>
+                    <tr>
 
-                    <th>Name</th>
+                        <th>
+                            ID
+                        </th>
 
-                    <th>Age</th>
+                        <th>
+                            Name
+                        </th>
 
-                    <th>Gender</th>
+                        <th>
+                            Age
+                        </th>
 
-                    <th>Complaint</th>
+                        <th>
+                            Gender
+                        </th>
 
-                </tr>
+                        <th>
+                            Complaint
+                        </th>
 
-            </thead>
+                    </tr>
+
+                </thead>
 
 
-            <tbody>
+                <tbody>
 
-            {% for patient in patients[:10] %}
+                {% for patient in patients[:10] %}
 
-                <tr>
+                    <tr>
 
-                    <td>
-                        {{ patient.id }}
-                    </td>
+                        <td>
+                            {{ patient.id }}
+                        </td>
 
-                    <td>
-                        {{ patient.name }}
-                    </td>
+                        <td>
+                            {{ patient.name }}
+                        </td>
 
-                    <td>
-                        {{ patient.age }}
-                    </td>
+                        <td>
+                            {{ patient.age }}
+                        </td>
 
-                    <td>
-                        {{ patient.gender }}
-                    </td>
+                        <td>
+                            {{ patient.gender }}
+                        </td>
 
-                    <td>
-                        {{ patient.chief_complaint }}
-                    </td>
+                        <td>
+                            {{ patient.chief_complaint }}
+                        </td>
 
-                </tr>
+                    </tr>
 
-            {% endfor %}
+                {% endfor %}
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
+
+        </div>
 
         {% else %}
 
         <p class="empty">
-            No patients found.
+            No patient records found.
         </p>
 
         {% endif %}
@@ -292,31 +478,62 @@
 
     <!-- SYSTEM MODULES -->
 
-    <div class="card modules"
-         style="margin-top: 20px;">
+    <div class="section">
 
-        <h2>System Modules</h2>
+        <h2>
+            Care AI Modules
+        </h2>
 
-        <p>Patient Case Taking</p>
 
-        <p>Guided Clinical History</p>
+        <div class="modules">
 
-        <p>AI Clinical Analysis</p>
+            <div class="module">
+                Patient Case Taking
+            </div>
 
-        <p>Red-Flag Detection</p>
+            <div class="module">
+                Guided Clinical History
+            </div>
 
-        <p>Medical Document OCR</p>
+            <div class="module">
+                AI Clinical Analysis
+            </div>
 
-        <p>AYUSH Clinical History</p>
+            <div class="module">
+                Red-Flag Detection
+            </div>
 
-        <p>Patient Records</p>
+            <div class="module">
+                Medical Document OCR
+            </div>
+
+            <div class="module">
+                AYUSH Clinical History
+            </div>
+
+            <div class="module">
+                Patient Records
+            </div>
+
+            <div class="module">
+                Clinical Data Management
+            </div>
+
+        </div>
 
     </div>
 
 
 </div>
 
+
+<footer>
+
+    Care AI — AI-Powered Patient Case Management System
+
+</footer>
+
+
 </body>
 
 </html>
-```
