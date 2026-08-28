@@ -2,12 +2,10 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Care AI - Patient Case System</title>
+    <title>Patient Dashboard</title>
 
     <style>
 
@@ -17,692 +15,498 @@
 
         body {
             margin: 0;
-            min-height: 100vh;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            background:
-                #0b0f14;
-
-            color: #f5f7fa;
+            background: #f1f3f5;
+            color: #20242a;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         /* =========================
-           TOP NAVBAR
-        ========================= */
+           NAVBAR
+        ========================== */
 
         .navbar {
-            height: 72px;
-
-            background: #11161d;
-
-            border-bottom:
-                1px solid #252c35;
-
+            height: 58px;
+            background: #111827;
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
-            padding: 0 45px;
-
-            position: sticky;
-            top: 0;
-
-            z-index: 10;
+            padding: 0 28px;
+            color: white;
         }
 
-        .logo {
+        .brand {
             display: flex;
-
             align-items: center;
-
-            gap: 12px;
-
-            font-size: 22px;
-
+            gap: 10px;
+            font-size: 15px;
             font-weight: 700;
         }
 
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-
+        .brand-icon {
+            width: 23px;
+            height: 23px;
+            border: 2px solid #d9dee5;
+            border-radius: 4px;
             display: flex;
-
             align-items: center;
             justify-content: center;
-
-            border-radius: 10px;
-
-            background: #f5f7fa;
-
-            color: #11161d;
-
-            font-size: 20px;
-
-            font-weight: 800;
+            font-size: 12px;
         }
 
         .nav-right {
             display: flex;
-
-            align-items: center;
-
             gap: 10px;
         }
 
-        .nav-icon {
-            width: 38px;
-            height: 38px;
-
-            border-radius: 9px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            background: #1a2028;
-
-            border:
-                1px solid #2a323c;
-
-            color: #d9dee5;
-
-            font-size: 16px;
+        .nav-button {
+            width: 25px;
+            height: 25px;
+            background: #ffffff;
+            border-radius: 4px;
+            color: #111827;
         }
 
         /* =========================
-           MAIN CONTAINER
-        ========================= */
+           PAGE
+        ========================== */
 
         .container {
-            width: 100%;
-
             max-width: 1050px;
-
-            margin: auto;
-
-            padding:
-                50px 25px 70px;
+            margin: 0 auto;
+            padding: 28px 25px 50px;
         }
 
         /* =========================
-           HEADER
-        ========================= */
+           DASHBOARD GRID
+        ========================== */
 
-        .page-header {
-            margin-bottom: 35px;
-        }
-
-        .page-header h1 {
-            margin: 0;
-
-            font-size: 34px;
-
-            letter-spacing: -0.5px;
-        }
-
-        .page-header p {
-            margin-top: 10px;
-
-            color: #8e98a5;
-
-            font-size: 15px;
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
         }
 
         /* =========================
-           FORM CARD
-        ========================= */
+           CARD
+        ========================== */
 
         .card {
-            background: #11161d;
-
-            border:
-                1px solid #252d37;
-
-            border-radius: 16px;
-
-            padding: 32px;
-
-            box-shadow:
-                0 15px 45px rgba(0, 0, 0, 0.25);
-        }
-
-        .card-header {
-            margin-bottom: 28px;
-        }
-
-        .card-header h2 {
-            margin: 0;
-
-            font-size: 21px;
-        }
-
-        .card-header p {
-            margin-top: 7px;
-
-            color: #858f9c;
-
-            font-size: 14px;
-        }
-
-        /* =========================
-           FORM GRID
-        ========================= */
-
-        .form-grid {
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 22px;
-        }
-
-        .form-group {
-            display: flex;
-
-            flex-direction: column;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            margin-bottom: 9px;
-
-            color: #dce1e7;
-
-            font-size: 14px;
-
-            font-weight: 600;
-        }
-
-        input,
-        select {
-            width: 100%;
-
-            padding: 14px 15px;
-
-            background: #0c1117;
-
-            color: #f5f7fa;
-
-            border:
-                1px solid #2a333e;
-
-            border-radius: 9px;
-
-            outline: none;
-
-            font-size: 15px;
-
-            transition:
-                border-color 0.2s,
-                box-shadow 0.2s,
-                background 0.2s;
-        }
-
-        input::placeholder {
-            color: #65707d;
-        }
-
-        input:hover,
-        select:hover {
-            background: #0f151c;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: #6c7785;
-
-            box-shadow:
-                0 0 0 3px rgba(255, 255, 255, 0.05);
-        }
-
-        select {
-            cursor: pointer;
-        }
-
-        select option {
-            background: #11161d;
-
-            color: #ffffff;
-        }
-
-        /* =========================
-           SUBMIT AREA
-        ========================= */
-
-        .submit-area {
-            margin-top: 32px;
-
-            padding-top: 25px;
-
-            border-top:
-                1px solid #252d37;
-
-            display: flex;
-
-            justify-content: flex-end;
-        }
-
-        button {
-            border: none;
-
-            padding: 14px 32px;
-
-            border-radius: 9px;
-
-            background: #f1f3f5;
-
-            color: #11161d;
-
-            font-size: 15px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            transition:
-                transform 0.15s,
-                background 0.2s;
-        }
-
-        button:hover {
             background: #ffffff;
-
-            transform: translateY(-1px);
+            border-radius: 5px;
+            padding: 22px 20px;
+            min-height: 235px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
         }
 
-        button:active {
-            transform: translateY(0);
-        }
-
-        /* =========================
-           RESULT
-        ========================= */
-
-        .result {
-            margin-top: 20px;
-
-            min-height: 20px;
-
-            color: #aeb7c2;
-
-            font-size: 14px;
-
-            line-height: 1.6;
+        .card-title {
+            margin: 0 0 23px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #252a30;
         }
 
         /* =========================
-           FOOTER
-        ========================= */
+           VITAL SIGNS
+        ========================== */
 
-        .footer {
-            margin-top: 25px;
+        .vitals {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 20px;
+        }
 
+        .vital {
             text-align: center;
+        }
 
-            color: #59636f;
+        .vital-icon {
+            height: 25px;
+            margin-bottom: 3px;
+            font-size: 22px;
+        }
 
+        .heart {
+            color: #d99391;
+        }
+
+        .temperature {
+            color: #dfa26c;
+        }
+
+        .pressure {
+            color: #6d9ec2;
+        }
+
+        .oxygen {
+            color: #69a98c;
+        }
+
+        .vital-value {
+            font-size: 23px;
+            font-weight: 700;
+            color: #15191e;
+            line-height: 1.1;
+        }
+
+        .vital-unit {
+            font-size: 10px;
+            color: #858b91;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           MEDICAL HISTORY
+        ========================== */
+
+        .history-section {
+            margin-bottom: 20px;
+        }
+
+        .history-title {
             font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #30353b;
+        }
+
+        .history-list {
+            margin: 0;
+            padding-left: 16px;
+            color: #777d84;
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        /* =========================
+           TREATMENT
+        ========================== */
+
+        .treatment-section {
+            margin-bottom: 17px;
+        }
+
+        .treatment-title {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #30353b;
+        }
+
+        .treatment-list {
+            margin: 0;
+            padding-left: 16px;
+            color: #777d84;
+            font-size: 11px;
+            line-height: 1.55;
+        }
+
+        /* =========================
+           RECOVERY PROGRESS
+        ========================== */
+
+        .recovery {
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .recovery-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #30353b;
+            width: 62px;
+        }
+
+        .progress {
+            flex: 1;
+            height: 5px;
+            background: #d9dde1;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 72%;
+            height: 100%;
+            background: #202020;
+            border-radius: 5px;
         }
 
         /* =========================
            RESPONSIVE
-        ========================= */
+        ========================== */
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
-            .navbar {
-                padding: 0 18px;
-            }
-
-            .container {
-                padding:
-                    35px 15px 50px;
-            }
-
-            .page-header h1 {
-                font-size: 28px;
-            }
-
-            .card {
-                padding: 22px;
-            }
-
-            .form-grid {
+            .dashboard-grid {
                 grid-template-columns: 1fr;
             }
 
-            .form-group.full {
-                grid-column: auto;
+            .card {
+                min-height: auto;
             }
 
-            .submit-area {
-                justify-content: stretch;
+        }
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                padding: 0 15px;
             }
 
-            button {
-                width: 100%;
+            .container {
+                padding: 18px 12px;
+            }
+
+            .dashboard-grid {
+                gap: 12px;
+            }
+
+            .card {
+                padding: 18px;
             }
 
         }
 
     </style>
-
 </head>
 
 
 <body>
 
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-<!-- =========================
-     NAVIGATION
-========================= -->
+    <header class="navbar">
 
-<header class="navbar">
+        <div class="brand">
 
-    <div class="logo">
+            <div class="brand-icon">
+                ♙
+            </div>
 
-        <div class="logo-icon">
-            C
+            Patient Dashboard
+
         </div>
 
-        <span>
-            Care AI
-        </span>
+        <div class="nav-right">
 
-    </div>
+            <div class="nav-button"></div>
+            <div class="nav-button"></div>
 
-
-    <div class="nav-right">
-
-        <div class="nav-icon">
-            ?
         </div>
 
-        <div class="nav-icon">
-            ☰
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- =========================
-     MAIN CONTENT
-========================= -->
-
-<main class="container">
-
-
-    <!-- PAGE HEADER -->
-
-    <div class="page-header">
-
-        <h1>
-            Patient Case Taking
-        </h1>
-
-        <p>
-            Enter patient information to begin the clinical assessment.
-        </p>
-
-    </div>
+    </header>
 
 
     <!-- =========================
-         PATIENT FORM
-    ========================= -->
+         MAIN DASHBOARD
+    ========================== -->
 
-    <section class="card">
+    <main class="container">
+
+        <div class="dashboard-grid">
 
 
-        <div class="card-header">
+            <!-- =====================
+                 VITAL SIGNS
+            ====================== -->
 
-            <h2>
-                Patient Information
-            </h2>
+            <section class="card">
 
-            <p>
-                Please provide the basic details of the patient.
-            </p>
+                <h2 class="card-title">
+                    Vital Signs
+                </h2>
+
+                <div class="vitals">
+
+                    <div class="vital">
+
+                        <div class="vital-icon heart">
+                            ♡
+                        </div>
+
+                        <div class="vital-value">
+                            92 bpm
+                        </div>
+
+                        <div class="vital-unit">
+                            Heart Rate
+                        </div>
+
+                    </div>
+
+
+                    <div class="vital">
+
+                        <div class="vital-icon temperature">
+                            ♨
+                        </div>
+
+                        <div class="vital-value">
+                            98.6 °F
+                        </div>
+
+                        <div class="vital-unit">
+                            Temperature
+                        </div>
+
+                    </div>
+
+
+                    <div class="vital">
+
+                        <div class="vital-icon pressure">
+                            ♡
+                        </div>
+
+                        <div class="vital-value">
+                            120/80
+                        </div>
+
+                        <div class="vital-unit">
+                            Blood Pressure
+                        </div>
+
+                    </div>
+
+
+                    <div class="vital">
+
+                        <div class="vital-icon oxygen">
+                            ▣
+                        </div>
+
+                        <div class="vital-value">
+                            98%
+                        </div>
+
+                        <div class="vital-unit">
+                            Oxygen Level
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================
+                 MEDICAL HISTORY
+            ====================== -->
+
+            <section class="card">
+
+                <h2 class="card-title">
+                    Medical History
+                </h2>
+
+
+                <div class="history-section">
+
+                    <div class="history-title">
+                        Past Conditions
+                    </div>
+
+                    <ul class="history-list">
+
+                        <li>Hypertension</li>
+                        <li>Diabetes</li>
+                        <li>Asthma</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="history-section">
+
+                    <div class="history-title">
+                        Past Treatments
+                    </div>
+
+                    <ul class="history-list">
+
+                        <li>Medication for hypertension</li>
+                        <li>Insulin for diabetes</li>
+                        <li>Inhaler for asthma</li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================
+                 TREATMENT PROGRESS
+            ====================== -->
+
+            <section class="card">
+
+                <h2 class="card-title">
+                    Treatment Progress
+                </h2>
+
+
+                <div class="treatment-section">
+
+                    <div class="treatment-title">
+                        Current Therapies
+                    </div>
+
+                    <ul class="treatment-list">
+
+                        <li>Physical therapy</li>
+                        <li>Occupational therapy</li>
+                        <li>Respiratory therapy</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="treatment-section">
+
+                    <div class="treatment-title">
+                        Medications
+                    </div>
+
+                    <ul class="treatment-list">
+
+                        <li>Metformin for diabetes</li>
+                        <li>Lisinopril for hypertension</li>
+                        <li>Albuterol inhaler for asthma</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="recovery">
+
+                    <div class="recovery-label">
+                        Recovery<br>
+                        Progress:
+                    </div>
+
+                    <div class="progress">
+
+                        <div class="progress-bar"></div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
 
         </div>
 
-
-        <form id="patientForm">
-
-
-            <div class="form-grid">
-
-
-                <!-- NAME -->
-
-                <div class="form-group">
-
-                    <label for="name">
-                        Patient Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Enter patient name"
-                        required>
-
-                </div>
-
-
-                <!-- AGE -->
-
-                <div class="form-group">
-
-                    <label for="age">
-                        Age
-                    </label>
-
-                    <input
-                        type="number"
-                        id="age"
-                        placeholder="Enter age"
-                        min="0"
-                        required>
-
-                </div>
-
-
-                <!-- GENDER -->
-
-                <div class="form-group">
-
-                    <label for="gender">
-                        Gender
-                    </label>
-
-                    <select id="gender">
-
-                        <option value="Male">
-                            Male
-                        </option>
-
-                        <option value="Female">
-                            Female
-                        </option>
-
-                        <option value="Other">
-                            Other
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- SYMPTOMS -->
-
-                <div class="form-group">
-
-                    <label for="symptoms">
-                        Symptoms
-                    </label>
-
-                    <input
-                        type="text"
-                        id="symptoms"
-                        placeholder="e.g. fever and tiredness"
-                        required>
-
-                </div>
-
-
-            </div>
-
-
-            <!-- SUBMIT -->
-
-            <div class="submit-area">
-
-                <button
-                    type="submit">
-
-                    Continue
-
-                </button>
-
-            </div>
-
-
-        </form>
-
-
-        <!-- RESULT -->
-
-        <p
-            id="result"
-            class="result">
-        </p>
-
-
-    </section>
-
-
-    <div class="footer">
-
-        Care AI • AI Patient Case Taking System
-
-    </div>
-
-
-</main>
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-    document
-        .getElementById("patientForm")
-        .addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-
-            const result =
-                document.getElementById("result");
-
-
-            const patientData = {
-
-                name:
-                    document
-                    .getElementById("name")
-                    .value,
-
-                age:
-                    document
-                    .getElementById("age")
-                    .value,
-
-                gender:
-                    document
-                    .getElementById("gender")
-                    .value,
-
-                symptoms:
-                    document
-                    .getElementById("symptoms")
-                    .value
-
-            };
-
-
-            result.innerText =
-                "Submitting patient information...";
-
-
-            fetch(
-                "http://127.0.0.1:5000/patient",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify(patientData)
-                }
-            )
-
-            .then(function(response) {
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "Server returned an error"
-                    );
-
-                }
-
-                return response.json();
-
-            })
-
-            .then(function(data) {
-
-                result.innerText =
-                    data.message ||
-                    "Patient information submitted successfully.";
-
-            })
-
-            .catch(function(error) {
-
-                console.error(error);
-
-                result.innerText =
-                    "Error connecting to backend. Make sure the Care AI server is running.";
-
-            });
-
-        });
-
-</script>
-
+    </main>
 
 </body>
 
